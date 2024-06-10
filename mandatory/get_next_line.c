@@ -1,76 +1,60 @@
 #include "../includes/fdf.h"
 
-void	free_ptr(char **ptr)
-{
-	if (*ptr != NULL)
-	{
-		free(*ptr);
-		ptr = NULL;
-	}
-}
-
-char	*merge_line(int nl_position, char **stash)
+char	*split_nl(char **save)
 {
 	char	*line;
 	char	*tmp;
+	int		i;
 
-	tmp = NULL;
-	if (nl_position <= 0)
-	{
-		if (**stash == '\0')
-		{
-			free(*stash);
-			*stash = NULL;
-			return (NULL);
-		}
-		line = *stash;
-		*stash = NULL;
-		return (line);
-	}
-	tmp = ft_substr(*stash, nl_position, BUFFER_SIZE);
-	line = *stash;
-	line[nl_position] = 0;
-	*stash = tmp;
-	return (line);
+	i = 0;
+	tmp = *save;
+	while (tmp[i] && tmp[i] != '\n')
+		i++;
+	line = ft_substr(*save, 0, i + 1);
+	if (tmp[i] == '\n')
+		i++;
+	*save = ft_strdup(tmp + i);
+	return (free(tmp), line);
 }
 
-char	*read_line(int fd, char **stash, char *buffer)
+char	*read_line(int fd, char *save)
 {
-	ssize_t	readed;
+	char	*buff;
+	int		readret;
 	char	*tmp;
-	char	*nl;
 
-	nl = ft_strchr(*stash, '\n');
-	tmp = NULL;
-	readed = 0;
-	while (!nl)
+	buff = ft_calloc((size_t)BUFFER_SIZE + 1, 1);
+	if (!buff)
+		return (NULL);
+	buff[0] = 0;
+	readret = 1;
+	while (readret && !ft_strchr(save, '\n'))
 	{
-		readed = read(fd, buffer, BUFFER_SIZE);
-		if (readed <= 0)
-			return (merge_line(readed, stash));
-		buffer[readed] = 0;
-		tmp = ft_strjoin(*stash, buffer);
-		free_ptr(stash);
-		*stash = tmp;
-		nl = ft_strchr(*stash, '\n');
+		readret = read(fd, buff, BUFFER_SIZE);
+		if (readret == -1)
+			return (free(buff), free(save), NULL);
+		buff[readret] = '\0';
+		tmp = ft_strjoin(save, buff);
+		free(save);
+		if (!tmp)
+			return (free(buff), NULL);
+		save = tmp;
 	}
-	return (merge_line(nl - *stash + 1, stash));
+	if (readret == 0 && save[0] == '\0')
+		return (free(buff), free(save), NULL);
+	return (free(buff), save);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*stash;
-	char		*buffer;
-	char		*line;
+	static char	*save;
+	char		*str;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE < 0)
 		return (NULL);
-	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buffer)
+	save = read_line(fd, save);
+	if (!save)
 		return (NULL);
-	if (!stash)
-		stash = ft_strdup("");
-	line = read_line(fd, &stash, buffer);
-	free_ptr(&buffer);
-	return (line);
+	str = split_nl(&save);
+	return (str);
 }

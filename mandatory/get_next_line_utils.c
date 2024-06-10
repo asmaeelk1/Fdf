@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:32:32 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/05/08 01:35:11 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/05/25 15:42:33 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,9 @@ char	*ft_strjoin(const char *s1, const char *s2)
 
 	e = 0;
 	i = 0;
-	if (!s1 || !s2)
-		return (NULL);
-	rtn = malloc(ft_strlen(s1) + ft_strlen(s2) + e * sizeof(char));
+	if (!s1)
+		return (ft_strdup(s2));
+	rtn = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!rtn)
 		return (NULL);
 	while (s1[i])

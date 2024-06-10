@@ -1,0 +1,7 @@
+/Users/asel-kha/Desktop/Fdf/MLX/build/CMakeFiles/mlx42.dir
+/Users/asel-kha/Desktop/Fdf/MLX/build/CMakeFiles/edit_cache.dir
+/Users/asel-kha/Desktop/Fdf/MLX/build/CMakeFiles/rebuild_cache.dir
+/Users/asel-kha/Desktop/Fdf/MLX/build/CMakeFiles/list_install_components.dir
+/Users/asel-kha/Desktop/Fdf/MLX/build/CMakeFiles/install.dir
+/Users/asel-kha/Desktop/Fdf/MLX/build/CMakeFiles/install/local.dir
+/Users/asel-kha/Desktop/Fdf/MLX/build/CMakeFiles/install/strip.dir

@@ -32,6 +32,7 @@ int	ft_putnbr_hex(unsigned long c, char start)
 	return (countlen);
 }
 
+
 int	ft_strncmp(char *s1, char *s2, size_t n)
 {
 	size_t	i;

@@ -1,6 +1,8 @@
 # ifndef FDF_H
 # define FDF_H
 
+# include "../MLX/include/MLX42/MLX42.h"
+# include <math.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -11,7 +13,11 @@
 #  define BUFFER_SIZE 10000
 # endif
 
-# define BAD_ARG "\033[31mError: Bad arguments\033[0m\n"
+
+#define WIDTH 512
+#define HEIGHT 512
+
+# define BAD_ARG "\033[31mError:\033[0m Bad arguments\n"
 # define INVALID_FILE "\033[31mError:\033[0m Invalide file\n"
 # define INVALID_MAP "\033[31mError:\033[0m Invalide map\n"
 # define EMPTY_FILE "\033[31mError:\033[0m Empty file\n"
@@ -20,6 +26,8 @@
 typedef struct s_x  t_x;
 typedef struct s_map  t_map;
 typedef struct s_data  t_data;
+typedef struct s_p  t_p;
+
 
 struct s_x
 {
@@ -36,11 +44,18 @@ struct s_map
 
 struct s_data
 {
-    t_x *x;
-    t_map *y;
-    int z;
-    int color;
+    t_x		*axis;
+    t_map	*ordinat;
+	int		x;
+	int		y;
 
+};
+
+struct	s_p
+{
+	int	x;
+	int y;
+	int color;
 };
 
 char	*get_next_line(int fd);
@@ -67,6 +82,9 @@ void	ft_putstr_fd(const char *s, int fd);
 void	free_struct(t_x **x);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char *ft_strtok(char *str, char del);
+// void	plotLine(t_p0 p0, t_p1 p1, t_data data, mlx_image_t **image);
+void	draw_line(mlx_image_t *image , t_p p0, t_p p1, int color);
+// void	draw_line(int x0, int y0, int x1, int y1);
 
 
 # endif

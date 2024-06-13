@@ -15,23 +15,6 @@ size_t	ft_strlen(const char *c)
 	return (i);
 }
 
-int	ft_putnbr_hex(unsigned long c, char start)
-{
-	int	countlen;
-
-	countlen = 0;
-	if (c > 15)
-	{
-		countlen += ft_putnbr_hex(c / 16, start);
-		countlen += ft_putnbr_hex(c % 16, start);
-	}
-	else if (c <= 9)
-		countlen += ft_putchar(48 + c);
-	else
-		countlen += ft_putchar(start + c - 10);
-	return (countlen);
-}
-
 
 int	ft_strncmp(char *s1, char *s2, size_t n)
 {

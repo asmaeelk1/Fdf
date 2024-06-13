@@ -46,12 +46,11 @@ static void line_parcer(char *axis,t_map **map, t_x *x)
 	ft_lstadd_back_map(map, x);
 }
 
-void parsing(char *file_name)
+void parsing(char *file_name, t_map **map)
 {
     int     file;
     int     size_line;
     char    *axis;
-	t_map	*map = NULL;
 	t_x		*line = NULL;
 
     file = check_file(file_name);
@@ -70,7 +69,7 @@ void parsing(char *file_name)
 		}
         if(size_line != line_len(axis))
             fatal(INVALID_MAP);
-        line_parcer(axis, &map ,line);
+        line_parcer(axis, map ,line);
         axis = get_next_line(file);
     }
 }

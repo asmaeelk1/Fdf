@@ -62,8 +62,8 @@ struct	s_p
 
 char	*get_next_line(int fd);
 void	fatal(const char *msg);
-void parsing(char *file_name, t_map **map);
-int		ft_putnbr_hex(unsigned long c, char start);
+int		putnbr_hex(char *hex);
+void	parsing(char *file_name, t_map **map);
 char	**ft_split(char *s, char c);
 char	*ft_strdup(const char *s1);
 int		ft_strncmp(char *s1, char *s2, size_t n);
@@ -76,7 +76,7 @@ int		ft_lstsize_axis(t_x **x);
 t_map	*ft_lstnew_map(t_x *axis);
 t_map	*ft_lstlast_map(t_map **map);
 void	ft_lstadd_back_map(t_map **map, t_x *new);
-int	ft_lstsize_map(t_map **map);
+int		ft_lstsize_map(t_map **map);
 char	*ft_strchr(char *s, int c);
 char	*ft_substr(char *s, unsigned int start, size_t len);
 void	*ft_calloc(size_t count, size_t size);
@@ -84,7 +84,7 @@ char	*ft_strjoin(const char *s1, const char *s2);
 void	ft_putstr_fd(const char *s, int fd);
 void	free_struct(t_x **x);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
-char *ft_strtok(char *str, char del);
+char	*ft_strtok(char *str, char del);
 // void	plotLine(t_p0 p0, t_p1 p1, t_data data, mlx_image_t **image);
 void	draw_line(mlx_image_t *image , t_p p0, t_p p1, int color);
 // void	draw_line(int x0, int y0, int x1, int y1);

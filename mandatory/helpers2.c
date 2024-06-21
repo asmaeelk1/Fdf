@@ -38,32 +38,29 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	return (ft_strlen(src));
 }
 
+ int	putnbr_hex(char *hex)
+ {
+	int i;
+	int hex_res;
+	hex_res = 0;
+	i = 0;
 
-// int	putnbr_hex
+	if(hex[i] == '0' && (hex[i+1] == 'x' || hex[i+1] == 'X'))
+		i = 2;
+	else 
+		fatal(INVALID_FILE);
+	while(hex[i])
+	{
+		if(hex[i] >= '0' && hex[i] <= '9')
+			hex_res = hex_res * 16 + (hex[i] - 48);
+		else if(hex[i] >= 'a' && hex[i] <= 'f')
+			hex_res = hex_res * 16 +( hex[i] - 'a' + 10);
+		else if(hex[i] >= 'A' && hex[i] <= 'F')
+			hex_res = hex_res * 16 +( hex[i] - 'A' + 10) ;
+		else
+			fatal(INVALID_FILE);
+		i++;
+	}
+	return(hex_res);
+ }
 
-
-// int    ft_atoi_hex(const char *hexaString)
-// {
-//     struct s_atoi    var;
-
-//     var.i = 0;
-//     var.length = ft_strlen(hexaString);
-//     var.startindex = 0;
-//     if (var.length > 1 && hexaString[0] == '0' && (hexaString[1] == 'x'
-//             || hexaString[1] == 'X'))
-//         var.startindex = 2;
-//     var.decimalnumber = 0;
-//     while (var.i < var.length)
-//     {
-//         var.currentchar = hexaString[var.i];
-//         if (var.currentchar >= '0' && var.currentchar <= '9')
-//             var.digitvalue = var.currentchar - '0';
-//         else if (var.currentchar >= 'A' && var.currentchar <= 'F')
-//             var.digitvalue = var.currentchar - 'A' + 10;
-//         else if (var.currentchar >= 'a' && var.currentchar <= 'f')
-//             var.digitvalue = var.currentchar - 'a' + 10;
-//         var.decimalnumber += var.digitvalue * pow(16, var.length - var.i - 1);
-//         var.i++;
-//     }
-//     return (var.decimalnumber);
-// }

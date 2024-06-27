@@ -23,35 +23,11 @@
 # define EMPTY_FILE "\033[31mError:\033[0m Empty file\n"
 # define MALLOC_FAIL "\033[31mAllocation fail\033[0m\n"
 
+typedef struct s_p  t_p;
 typedef struct s_x  t_x;
 typedef struct s_map  t_map;
 typedef struct s_data  t_data;
-typedef struct s_p  t_p;
 
-
-struct s_x
-{
-    int altitude;
-	int axis;
-	int ordinate;
-    int color;
-    t_x *next;
-};
-
-struct s_map
-{
-    t_x *lines;
-   t_map *next;
-};
-
-struct s_data
-{
-    t_x		*axis;
-    t_map	*ordinat;
-	int		x;
-	int		y;
-
-};
 
 struct	s_p
 {
@@ -59,23 +35,50 @@ struct	s_p
 	int y;
 	int color;
 };
+struct s_x
+{
+	int	x;
+	int	y;
+    int altitude;
+    int color;
+    t_x *next;
+};
+
+struct s_map
+{
+    t_x *lines;
+	int space;
+	t_map *next;
+};
+
+struct s_data
+{
+    t_map	*map;
+	int width;
+	int height;
+	int zoom;
+	mlx_t* mlx;
+};
+
 
 char	*get_next_line(int fd);
 void	fatal(const char *msg);
 int		putnbr_hex(char *hex);
-void	parsing(char *file_name, t_map **map);
+void	parsing(char *file_name, t_data **data);
 char	**ft_split(char *s, char c);
 char	*ft_strdup(const char *s1);
 int		ft_strncmp(char *s1, char *s2, size_t n);
 size_t	ft_strlen(const char *c);
 int		ft_atoi(const char *str, t_x **x);
-t_x		*ft_lstnew_axis(int altitude);
+t_x		*ft_lstnew_axis(int altitude, int x, int y);
 t_x		*ft_lstlast_axis(t_x *x);
 void	ft_lstadd_back_axis(t_x **x, t_x *new);
 int		ft_lstsize_axis(t_x **x);
 t_map	*ft_lstnew_map(t_x *axis);
 t_map	*ft_lstlast_map(t_map **map);
-void	ft_lstadd_back_map(t_map **map, t_x *new);
+void	ft_lstadd_back_map(t_data **data, t_x *new);
+
+
 int		ft_lstsize_map(t_map **map);
 char	*ft_strchr(char *s, int c);
 char	*ft_substr(char *s, unsigned int start, size_t len);
@@ -85,10 +88,9 @@ void	ft_putstr_fd(const char *s, int fd);
 void	free_struct(t_x **x);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	*ft_strtok(char *str, char del);
-// void	plotLine(t_p0 p0, t_p1 p1, t_data data, mlx_image_t **image);
-void	draw_line(mlx_image_t *image , t_p p0, t_p p1, int color);
-// void	draw_line(int x0, int y0, int x1, int y1);
-void	draw_map(mlx_image_t *image ,t_map **map, int color);
+void	update_points_iso(t_map **map);
+void	draw_line(mlx_image_t *image ,t_map **map, int color);
 
+void	draw_map(mlx_image_t *image ,t_data **data);
 
 # endif

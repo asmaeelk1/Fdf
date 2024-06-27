@@ -51,14 +51,12 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 		fatal(INVALID_FILE);
 	while(hex[i])
 	{
-		if(hex[i] >= '0' && hex[i] <= '9')
+		if(hex[i] >= '0' && hex[i] <= '9' )
 			hex_res = hex_res * 16 + (hex[i] - 48);
 		else if(hex[i] >= 'a' && hex[i] <= 'f')
 			hex_res = hex_res * 16 +( hex[i] - 'a' + 10);
 		else if(hex[i] >= 'A' && hex[i] <= 'F')
 			hex_res = hex_res * 16 +( hex[i] - 'A' + 10) ;
-		else
-			fatal(INVALID_FILE);
 		i++;
 	}
 	return(hex_res);

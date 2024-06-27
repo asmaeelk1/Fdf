@@ -35,16 +35,14 @@ char *ft_strtok(char *str, char del)
     int i;
     static char *line;
     char *token;
-
     (1) && (i = 0);
     token = ft_calloc(50, 1);
     if(str)
         line = ft_strdup(str);
-    while(*line == del)
+    while(*line && *line == del)
         line++;
     while(*line && *line != del)
     {
-    
         token[i] = *line;
         i++;
         line++;

@@ -1,15 +1,17 @@
 #include "../includes/fdf.h"
 
 
-t_x	*ft_lstnew_axis(int altitude)
+t_x	*ft_lstnew_axis(int altitude, int x, int y)
 {
 	t_x	*node;
 
 	node = malloc(sizeof(t_x));
 	if (!node)
 		return (NULL);
+	node->y = y;
 	node->altitude = altitude;
 	node->next = NULL;
+	node->x = x;
 	return (node);
 }
 

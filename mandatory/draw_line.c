@@ -1,90 +1,89 @@
 #include "../includes/fdf.h"
+#include <stdlib.h>
 
-void draw_line(mlx_image_t *image, t_p p0, t_p p1, int color) {
-    int dx = abs(p1.x - p0.x);
-    int dy = abs(p1.y - p0.y);
+void isometric_projection(int *x, int *y, int z)
+{
+	int previous_x;
+	int previous_y;
 
-    int increment_x = (p1.x > p0.x) ? 1 : -1;
-    int increment_y = (p1.y > p0.y) ? 1 : -1;
+    previous_x = *x;
+    previous_y = *y;
+    *x = (previous_x - previous_y) * cos(0.523599);
+    *y =  + (previous_x + previous_y) * sin(0.523599) - z;
+}
+// void	update_points_iso(t_p **p0, t_p **p1,t_p **p2, t_data **data)
+// {
+	
+// }
 
-    int diff = 0;
-    int D = 0;
+void plotLine(mlx_image_t *image, int x0, int y0, int x1, int y1) 
+{
+    int dx = abs(x1 - x0);
+    int dy = abs(y1 - y0);
+    int sx;
+	int	sy;
+	int err;
 
-    int x = p0.x;
-    int y = p0.y;
-
-    if (dx >= dy) {
-        D = dx;
-        diff = dy - dx / 2;
-        while (x != p1.x) {
-            mlx_put_pixel(image, x, y, color);
-            x += increment_x;
-            if ((diff += dy) >= 0) {
-                y += increment_y;
-                diff -= dx;
-            }
-        }
-    } else {
-        D = dy;
-        diff = dx - dy / 2;
-        while (y != p1.y) {
-            mlx_put_pixel(image, x, y, color);
-            y += increment_y;
-            if ((diff += dx) >= 0) {
-                x += increment_x;
-                diff -= dy;
-            }
-        }
+    ((x0 < x1) && ( sx = 1)) || (sx = -1);
+	((y0 < y1) && ( sy = 1)) || (sy = -1);
+	((dx > dy) && (err = dx / 2)) || ( err = -dy / 2);
+    while (1) {
+        mlx_put_pixel(image, x0, y0, 0xFFFFFFFF);
+        if (x0 == x1 && y0 == y1) break;
+        if (err > -dx) { err -= dy; x0 += sx; }
+        if (err < dy) { err += dx; y0 += sy; }
     }
-    mlx_put_pixel(image, p1.x, p1.y, color);
 }
 
 
-void	draw_horizontal_line(mlx_image_t *image ,t_p start, t_p end,int color)
+void	display_center(t_p **p, t_data **data)
 {
-    end.y = start.y;
-    draw_line(image, start, end, color);
+	(*p)->x *= (*data)->map->space + (*data)->zoom;
+	(*p)->y	*= (*data)->map->space + (*data)->zoom;
+	(*p)->x -= (((*data)->map->space + (*data)->zoom) * (*data)->width) / 2;
+	(*p)->y -= (((*data)->map->space + (*data)->zoom) * (*data)->height) / 2;
+	(*p)->x += WIDTH / 2;
+	(*p)->y += HEIGHT / 2;
+
 }
-
-void	draw_vertical_line(mlx_image_t *image ,t_p start, t_p end,int color)
+void	update_points(t_p **p0, t_p **p1,t_p **p2, t_data **data)
 {
-    end.x = start.x;
-    draw_line(image, start, end, color);
+	display_center(p0, data);
+	display_center(p1, data);
+	display_center(p2, data);
 }
-
-
-void	draw_map(mlx_image_t *image ,t_map **map, int color)
+void draw_map(mlx_image_t *image, t_data **data)
 {
-	t_map *current_line;
-	t_p start;
-	t_p end;
+    t_map *current_line;
+    t_x *points;
+    t_p *p0;
+    t_p *p1;
+    t_p *p2;
+	
+	(p0 = ft_calloc(1, sizeof(t_p)), p1 =ft_calloc(1, sizeof(t_p)),
+		p2 =ft_calloc(1, sizeof(t_p)), current_line = (*data)->map);
+    while (current_line)
+    {
+        points = current_line->lines;
+        while (points)
+        {
+			p0->x = points->x;
+			p0->y = points->y;
+			p1->x = p0->x +1;
+			p1->y = p0->y;
+			p2->x =	p0->x;
+			p2->y = p0->y + 1;
+			update_points(&p0, &p1, &p2, data);
 
-	current_line = *map;
-	start.x = 50;
-	start.y = 50;
-	end.x = 0;
-	end.y = 0;
-	int space ;
-	((WIDTH > HEIGHT) && (space = (WIDTH / 2) / ft_lstsize_axis(&((*map)->lines))) )
-		|| (space = (HEIGHT / 2) / ft_lstsize_map(map));
-	while (current_line)
-	{
-        while (current_line->lines) {
-            end.x = start.x + space;
-            end.y = start.y; 
-            draw_horizontal_line(image, start, end, color);
-            end.x = start.x;
-            end.y = start.y + space; 
-            draw_vertical_line(image, start, end, color);
-            start.x = start.x + space;
-            current_line->lines = current_line->lines->next;
+			if (points->next)
+				plotLine(image, p0->x, p0->y, p1->x, p0->y);
+			if (current_line->next)
+				plotLine(image, p0->x, p0->y, p0->x, p2->y);
+            points = points->next;
         }
-		draw_vertical_line(image, start, end, color);
-        start.x = 50;
-        start.y = start.y + space; 
-		end.x = end.x + space;
-    	end.y = end.y;
-        draw_horizontal_line(image, start, end, color);
-        current_line = current_line->next; 
+        current_line = current_line->next;
     }
+	free(p0);
+	free(p1);
+	free(p2);
 }

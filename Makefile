@@ -1,5 +1,5 @@
 CC			= cc 
-CFLAGS		= -Wall -g -Wextra -Werror -I includes 
+CFLAGS		= -Wall -g -Wextra -Werror -I includes -Ofast
 RM			= rm -rf
 MKDIR		= mkdir -p
 

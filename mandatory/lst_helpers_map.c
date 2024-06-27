@@ -24,18 +24,18 @@ t_map	*ft_lstlast_map(t_map **map)
 	return (tmp);
 }
 
-void	ft_lstadd_back_map(t_map **map, t_x *new)
+void	ft_lstadd_back_map(t_data **data, t_x *new)
 {
 
 	t_map	*last;
 
-	if (!map && !(*map)) {
-		*map = ft_lstnew_map(new);
+	if (!(*data)->map && !((*data)->map)) {
+		(*data)->map = ft_lstnew_map(new);
 		return;
 	}
-	last = ft_lstlast_map(map);
+	last = ft_lstlast_map(&(*data)->map);
 	if(!last)
-		*map = ft_lstnew_map(new);
+		(*data)->map = ft_lstnew_map(new);
 	else
 		last->next = ft_lstnew_map(new);
 }

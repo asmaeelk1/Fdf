@@ -33,6 +33,7 @@ struct	s_p
 {
 	int	x;
 	int y;
+	int altitude;
 	int color;
 };
 struct s_x
@@ -88,8 +89,16 @@ void	ft_putstr_fd(const char *s, int fd);
 void	free_struct(t_x **x);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	*ft_strtok(char *str, char del);
-void	update_points_iso(t_map **map);
-void	draw_line(mlx_image_t *image ,t_map **map, int color);
+
+void	plotLine(mlx_image_t *image, t_p *p0, t_p *p1, int color);
+// void plotLine(mlx_image_t *image, int x0, int y0, int x1, int y1); 
+
+
+
+
+
+void	update_points_iso(t_p **p);
+
 
 void	draw_map(mlx_image_t *image ,t_data **data);
 

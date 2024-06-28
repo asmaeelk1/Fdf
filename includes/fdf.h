@@ -14,8 +14,8 @@
 # endif
 
 
-#define WIDTH 1000
-#define HEIGHT 1000
+#define WIDTH 1800
+#define HEIGHT 1200
 
 # define BAD_ARG "\033[31mError:\033[0m Bad arguments\n"
 # define INVALID_FILE "\033[31mError:\033[0m Invalide file\n"
@@ -58,6 +58,7 @@ struct s_data
 	int width;
 	int height;
 	int zoom;
+	int altitude_inc;
 	mlx_t* mlx;
 };
 
@@ -90,14 +91,14 @@ void	free_struct(t_x **x);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	*ft_strtok(char *str, char del);
 
-void	plotLine(mlx_image_t *image, t_p *p0, t_p *p1, int color);
+void	plotLine(mlx_image_t *image, t_p p0, t_p p1, int color);
 // void plotLine(mlx_image_t *image, int x0, int y0, int x1, int y1); 
 
 
 
 
 
-void	update_points_iso(t_p **p);
+void	update_points_iso(t_p *p);
 
 
 void	draw_map(mlx_image_t *image ,t_data **data);

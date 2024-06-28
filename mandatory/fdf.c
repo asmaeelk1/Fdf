@@ -42,7 +42,7 @@ int main(int ac, char **av)
 		mlx_close_window(data->mlx);
 		return(EXIT_FAILURE);
 	}
-	
+
 	draw_map(image, &data);
 	mlx_loop_hook(data->mlx, ft_hook, data->mlx);
 

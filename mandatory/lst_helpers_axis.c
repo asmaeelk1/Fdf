@@ -11,9 +11,9 @@ t_x	*ft_lstnew_axis(int altitude, int x, int y)
 	node->y = y;
 	node->altitude = altitude;
 	if (node->altitude > 0)
-		node->color = 16711680;
+		node->color = 0xFF00FFFF;
 	else
-		node->color = 0xFFFFFF;
+		node->color = 0xFFFFFFFF;
 	node->next = NULL;
 	node->x = x;
 	return (node);

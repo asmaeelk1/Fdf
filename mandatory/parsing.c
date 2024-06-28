@@ -83,7 +83,8 @@ void parsing(char *file_name, t_data **data)
     }
 	(*data)->width = width;
 	(*data)->height = height;
-	((WIDTH >= HEIGHT) && ((*data)->map->space = (WIDTH / 2) / (*data)->width) ) ||
+	(*data)->altitude_inc = 1;
+	((WIDTH <= HEIGHT) && ((*data)->map->space = (WIDTH / 2) / (*data)->width) ) ||
 		((*data)->map->space = (HEIGHT / 2) / (*data)->width);
 	
 }

@@ -34,7 +34,7 @@ char *ft_strtok(char *str, char del)
 {
     int i;
     static char *line;
-    char *token;
+    char *token ;
     (1) && (i = 0);
     token = ft_calloc(50, 1);
     if(str)

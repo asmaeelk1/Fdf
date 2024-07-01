@@ -27,8 +27,6 @@ typedef struct s_p  t_p;
 typedef struct s_x  t_x;
 typedef struct s_map  t_map;
 typedef struct s_data  t_data;
-
-
 struct	s_p
 {
 	int	x;
@@ -60,8 +58,8 @@ struct s_data
 	int zoom;
 	int altitude_inc;
 	mlx_t* mlx;
+	mlx_image_t* image;
 };
-
 
 char	*get_next_line(int fd);
 void	fatal(const char *msg);
@@ -72,15 +70,13 @@ char	*ft_strdup(const char *s1);
 int		ft_strncmp(char *s1, char *s2, size_t n);
 size_t	ft_strlen(const char *c);
 int		ft_atoi(const char *str, t_x **x);
-t_x		*ft_lstnew_axis(int altitude, int x, int y);
+t_x		*ft_lstnew_axis(int altitude, int x, int y, char *color);
 t_x		*ft_lstlast_axis(t_x *x);
 void	ft_lstadd_back_axis(t_x **x, t_x *new);
 int		ft_lstsize_axis(t_x **x);
 t_map	*ft_lstnew_map(t_x *axis);
 t_map	*ft_lstlast_map(t_map **map);
 void	ft_lstadd_back_map(t_data **data, t_x *new);
-
-
 int		ft_lstsize_map(t_map **map);
 char	*ft_strchr(char *s, int c);
 char	*ft_substr(char *s, unsigned int start, size_t len);
@@ -89,18 +85,13 @@ char	*ft_strjoin(const char *s1, const char *s2);
 void	ft_putstr_fd(const char *s, int fd);
 void	free_struct(t_x **x);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
-char	*ft_strtok(char *str, char del);
 
+// char	*ft_strtok(char *str, char *sep);
+
+char	*ft_strtok(char *str, char del);
 void	plotLine(mlx_image_t *image, t_p p0, t_p p1, int color);
 // void plotLine(mlx_image_t *image, int x0, int y0, int x1, int y1); 
-
-
-
-
-
 void	update_points_iso(t_p *p);
-
-
-void	draw_map(mlx_image_t *image ,t_data **data);
+void	draw_map(t_data **data);
 
 # endif

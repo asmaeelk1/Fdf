@@ -1,7 +1,8 @@
 
 #include "../includes/fdf.h"
 
-void plotLine(mlx_image_t *image, t_p p0, t_p p1, int color) {
+void plotLine(mlx_image_t *image, t_p p0, t_p p1, int color)
+{
     int dx = abs(p1.x - p0.x);
     int dy = abs(p1.y - p0.y);
     int sx = (p0.x < p1.x) ? 1 : -1;
@@ -50,7 +51,7 @@ void	display_center(t_p **p, t_data **data)
 	(*p)->y += HEIGHT / 2;
 }
 
-void draw_map(mlx_image_t *image, t_data **data) {
+void draw_map(t_data **data) {
     t_map *current_line = (*data)->map;
     t_p *p1 = ft_calloc(1, sizeof(t_p));
     t_p *p2 = ft_calloc(1, sizeof(t_p));
@@ -69,7 +70,7 @@ void draw_map(mlx_image_t *image, t_data **data) {
 		   display_center(&p1, data);
 		   display_center(&p2, data);
 		   if (current_line->lines->next)
-                plotLine(image, *p1, *p2, current_line->lines->color);
+                plotLine(((*data)->image), *p1, *p2, current_line->lines->color);
 			if (tmp)
             {
                 p1 = &((t_p){current_line->lines->x, current_line->lines->y,
@@ -77,7 +78,7 @@ void draw_map(mlx_image_t *image, t_data **data) {
                 p2 = &(t_p){p1->x , p1->y + 1, tmp->altitude, p1->color};
                 display_center(&p1, data);
                 display_center(&p2, data);
-                plotLine(image, *p1, *p2,  current_line->lines->color);
+                plotLine(((*data)->image), *p1, *p2,  current_line->lines->color);
                 tmp = tmp->next;
             }
             current_line->lines = current_line->lines->next;

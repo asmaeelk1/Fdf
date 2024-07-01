@@ -18,7 +18,7 @@ int	ft_atoi(const char *str, t_x **x)
 	if(nbr > INT32_MAX || nbr * signe < INT32_MIN)
 		(free_struct(x), fatal(BAD_ARG));
 	if (str[i] && (str[i] < '0' || str[i] > '9') && str[i] != '\n')
-		(free_struct(x), fatal(BAD_ARG));
+		(free_struct(x),  puts("here"),fatal(BAD_ARG));
 	return (nbr * signe);
 }
 
@@ -38,16 +38,16 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	return (ft_strlen(src));
 }
 
+
  int	putnbr_hex(char *hex)
  {
 	int i;
 	int hex_res;
 	hex_res = 0;
 	i = 0;
-
 	if(hex[i] == '0' && (hex[i+1] == 'x' || hex[i+1] == 'X'))
 		i = 2;
-	else 
+	else
 		fatal(INVALID_FILE);
 	while(hex[i])
 	{
@@ -56,9 +56,11 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 		else if(hex[i] >= 'a' && hex[i] <= 'f')
 			hex_res = hex_res * 16 +( hex[i] - 'a' + 10);
 		else if(hex[i] >= 'A' && hex[i] <= 'F')
-			hex_res = hex_res * 16 +( hex[i] - 'A' + 10) ;
+			hex_res = hex_res * 16 +( hex[i] - 'A' + 10);
 		i++;
 	}
+	hex_res = hex_res * 16 + 15;
+	hex_res = hex_res * 16 + 15;
 	return(hex_res);
  }
 

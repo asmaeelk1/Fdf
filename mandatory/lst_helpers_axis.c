@@ -1,7 +1,7 @@
 #include "../includes/fdf.h"
 
 
-t_x	*ft_lstnew_axis(int altitude, int x, int y)
+t_x	*ft_lstnew_axis(int altitude, int x, int y, char *color)
 {
 	t_x	*node;
 
@@ -10,11 +10,15 @@ t_x	*ft_lstnew_axis(int altitude, int x, int y)
 		return (NULL);
 	node->y = y;
 	node->altitude = altitude;
-	if (node->altitude > 0)
-		node->color = 0xFF00FFFF;
-	else
-		node->color = 0xFFFFFFFF;
+	// if(node->altitude > 0)
+	// 	node->color = putnbr_hex("0xff00ff");
 	node->next = NULL;
+	if(*color != '\0' && puts("here2"))
+		node->color = putnbr_hex(color);
+	else if(node->altitude > 0)
+		node->color = putnbr_hex("0xff00ff");
+	else 
+		node->color = putnbr_hex("0xffffff");
 	node->x = x;
 	return (node);
 }

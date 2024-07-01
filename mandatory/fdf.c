@@ -32,18 +32,18 @@ int main(int ac, char **av)
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	if (!(image = mlx_new_image(data->mlx, WIDTH, HEIGHT)))
+	if (!(data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT)))
 	{
 		mlx_close_window(data->mlx);
 		return(EXIT_FAILURE);
 	}
-	if (mlx_image_to_window(data->mlx, image, 0, 0) == -1)
+	if (mlx_image_to_window(data->mlx, data->image, 0, 0) == -1)
 	{
 		mlx_close_window(data->mlx);
 		return(EXIT_FAILURE);
 	}
 
-	draw_map(image, &data);
+	draw_map( &data);
 	mlx_loop_hook(data->mlx, ft_hook, data->mlx);
 
 	mlx_loop(data->mlx);

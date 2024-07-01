@@ -33,7 +33,7 @@ static int line_len(char *line)
 static void line_parcer(char *axis,t_data **data, t_x *x, int y)
 {
     char	**points;
-	// char	*color;
+	char	*color;
     int		i;
 	int		altitude;
 
@@ -43,12 +43,8 @@ static void line_parcer(char *axis,t_data **data, t_x *x, int y)
     while(points[i])
     {
 		altitude = ft_atoi(ft_strtok(points[i], ','),&x);
-        ft_lstadd_back_axis(&x, ft_lstnew_axis(altitude,i ,y));
-		// color = ft_strtok(NULL, ',');
-		// if(*color != '\0')
-		// 	x->color = putnbr_hex(color);
-		// else
-		// 	x->color = putnbr_hex("0xFFFFFF");
+		color = ft_strtok(NULL, ',');
+        ft_lstadd_back_axis(&x, ft_lstnew_axis(altitude,i ,y, color));
         i++;
     }
 	ft_lstadd_back_map(data, x);

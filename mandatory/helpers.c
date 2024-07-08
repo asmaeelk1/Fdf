@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helpers.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/23 10:19:15 by asel-kha          #+#    #+#             */
+/*   Updated: 2024/07/08 16:17:08 by asel-kha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/fdf.h"
 
 int	ft_putchar(char c)
 {
-	return (write (1, &c, 1));
+	return (write(1, &c, 1));
 }
 
 size_t	ft_strlen(const char *c)
@@ -14,7 +26,6 @@ size_t	ft_strlen(const char *c)
 		i++;
 	return (i);
 }
-
 
 int	ft_strncmp(char *s1, char *s2, size_t n)
 {
@@ -30,23 +41,24 @@ int	ft_strncmp(char *s1, char *s2, size_t n)
 	return (0);
 }
 
-char *ft_strtok(char *str, char del)
+char	*ft_strtok(char *str, char del)
 {
-    int i;
-    static char *line;
-    char *token ;
-    (1) && (i = 0);
-    token = ft_calloc(50, 1);
-    if(str)
-        line = ft_strdup(str);
-    while(*line && *line == del)
-        line++;
-    while(*line && *line != del)
-    {
-        token[i] = *line;
-        i++;
-        line++;
-    }
-    token[i] = '\0';
-    return(token);
+	int			i;
+	static char	*line;
+	char		*token;
+
+	(1) && (i = 0);
+	token = ft_calloc(50, 1);
+	if (str)
+		line = ft_strdup(str);
+	while (*line && *line == del)
+		line++;
+	while (*line && *line != del)
+	{
+		token[i] = *line;
+		i++;
+		line++;
+	}
+	token[i] = '\0';
+	return (token);
 }

@@ -13,7 +13,7 @@
 #  define BUFFER_SIZE 10000
 # endif
 
-
+ 
 #define WIDTH 1800
 #define HEIGHT 1200
 
@@ -27,6 +27,7 @@ typedef struct s_p  t_p;
 typedef struct s_x  t_x;
 typedef struct s_map  t_map;
 typedef struct s_data  t_data;
+typedef struct s_plotline  t_plotline;
 struct	s_p
 {
 	int	x;
@@ -56,9 +57,18 @@ struct s_data
 	int width;
 	int height;
 	int zoom;
-	int altitude_inc;
 	mlx_t* mlx;
 	mlx_image_t* image;
+};
+
+struct s_plotline
+{
+	int	dx;
+	int	dy;
+	int	sx;
+	int	sy;
+	int	err;
+	int	e2;
 };
 
 char	*get_next_line(int fd);
@@ -89,9 +99,9 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 // char	*ft_strtok(char *str, char *sep);
 
 char	*ft_strtok(char *str, char del);
-void	plotLine(mlx_image_t *image, t_p p0, t_p p1, int color);
+// void	plotLine(mlx_image_t *image, t_p p0, t_p p1, int color);
 // void plotLine(mlx_image_t *image, int x0, int y0, int x1, int y1); 
-void	update_points_iso(t_p *p);
+// void	update_points_iso(t_p *p);
 void	draw_map(t_data **data);
 
 # endif

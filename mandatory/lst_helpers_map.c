@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lst_helpers_map.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/23 10:19:15 by asel-kha          #+#    #+#             */
+/*   Updated: 2024/07/08 16:17:23 by asel-kha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/fdf.h"
 
 t_map	*ft_lstnew_map(t_x *axis)
@@ -14,7 +26,9 @@ t_map	*ft_lstnew_map(t_x *axis)
 
 t_map	*ft_lstlast_map(t_map **map)
 {
-	t_map *tmp = *map;
+	t_map	*tmp;
+
+	tmp = *map;
 	if (!tmp)
 		return (NULL);
 	while (tmp->next != NULL)
@@ -26,15 +40,15 @@ t_map	*ft_lstlast_map(t_map **map)
 
 void	ft_lstadd_back_map(t_data **data, t_x *new)
 {
-
 	t_map	*last;
 
-	if (!(*data)->map && !((*data)->map)) {
+	if (!(*data)->map && !((*data)->map))
+	{
 		(*data)->map = ft_lstnew_map(new);
-		return;
+		return ;
 	}
 	last = ft_lstlast_map(&(*data)->map);
-	if(!last)
+	if (!last)
 		(*data)->map = ft_lstnew_map(new);
 	else
 		last->next = ft_lstnew_map(new);

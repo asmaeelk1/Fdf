@@ -1,5 +1,16 @@
-#include "../includes/fdf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lst_helpers_axis.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/23 10:19:15 by asel-kha          #+#    #+#             */
+/*   Updated: 2024/07/08 16:17:17 by asel-kha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../includes/fdf.h"
 
 t_x	*ft_lstnew_axis(int altitude, int x, int y, char *color)
 {
@@ -10,14 +21,12 @@ t_x	*ft_lstnew_axis(int altitude, int x, int y, char *color)
 		return (NULL);
 	node->y = y;
 	node->altitude = altitude;
-	// if(node->altitude > 0)
-	// 	node->color = putnbr_hex("0xff00ff");
 	node->next = NULL;
-	if(*color != '\0' && puts("here2"))
+	if (*color != '\0')
 		node->color = putnbr_hex(color);
-	else if(node->altitude > 0)
+	else if (node->altitude > 0)
 		node->color = putnbr_hex("0xff00ff");
-	else 
+	else
 		node->color = putnbr_hex("0xffffff");
 	node->x = x;
 	return (node);
@@ -25,7 +34,9 @@ t_x	*ft_lstnew_axis(int altitude, int x, int y, char *color)
 
 t_x	*ft_lstlast_axis(t_x *x)
 {
-	t_x *tmp = x;
+	t_x	*tmp;
+
+	tmp = x;
 	if (!tmp)
 		return (NULL);
 	while (tmp->next)
@@ -53,10 +64,9 @@ void	ft_lstadd_back_axis(t_x **x, t_x *new)
 	last->next = new;
 }
 
-
 int	ft_lstsize_axis(t_x **x)
 {
-	int		count;
+	int	count;
 	t_x	*tmp;
 
 	tmp = *x;

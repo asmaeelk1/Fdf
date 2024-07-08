@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helpers2.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/23 10:19:15 by asel-kha          #+#    #+#             */
+/*   Updated: 2024/07/08 16:17:12 by asel-kha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/fdf.h"
 
 int	ft_atoi(const char *str, t_x **x)
@@ -15,10 +27,10 @@ int	ft_atoi(const char *str, t_x **x)
 		fatal(BAD_ARG);
 	while (str[i] && (str[i] >= '0' && str[i] <= '9'))
 		(1) && (nbr = nbr * 10, nbr += str[i] - 48, i++);
-	if(nbr > INT32_MAX || nbr * signe < INT32_MIN)
+	if (nbr > INT32_MAX || nbr * signe < INT32_MIN)
 		(free_struct(x), fatal(BAD_ARG));
 	if (str[i] && (str[i] < '0' || str[i] > '9') && str[i] != '\n')
-		(free_struct(x),  puts("here"),fatal(BAD_ARG));
+		(free_struct(x), puts("here"), fatal(BAD_ARG));
 	return (nbr * signe);
 }
 
@@ -38,29 +50,28 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	return (ft_strlen(src));
 }
 
+int	putnbr_hex(char *hex)
+{
+	int	i;
+	int	hex_res;
 
- int	putnbr_hex(char *hex)
- {
-	int i;
-	int hex_res;
 	hex_res = 0;
 	i = 0;
-	if(hex[i] == '0' && (hex[i+1] == 'x' || hex[i+1] == 'X'))
+	if (hex[i] == '0' && (hex[i + 1] == 'x' || hex[i + 1] == 'X'))
 		i = 2;
 	else
 		fatal(INVALID_FILE);
-	while(hex[i])
+	while (hex[i])
 	{
-		if(hex[i] >= '0' && hex[i] <= '9' )
+		if (hex[i] >= '0' && hex[i] <= '9')
 			hex_res = hex_res * 16 + (hex[i] - 48);
-		else if(hex[i] >= 'a' && hex[i] <= 'f')
-			hex_res = hex_res * 16 +( hex[i] - 'a' + 10);
-		else if(hex[i] >= 'A' && hex[i] <= 'F')
-			hex_res = hex_res * 16 +( hex[i] - 'A' + 10);
+		else if (hex[i] >= 'a' && hex[i] <= 'f')
+			hex_res = hex_res * 16 + (hex[i] - 'a' + 10);
+		else if (hex[i] >= 'A' && hex[i] <= 'F')
+			hex_res = hex_res * 16 + (hex[i] - 'A' + 10);
 		i++;
 	}
 	hex_res = hex_res * 16 + 15;
 	hex_res = hex_res * 16 + 15;
-	return(hex_res);
- }
-
+	return (hex_res);
+}

@@ -49,7 +49,6 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	return (res);
 }
 
-
 char	*ft_strdup(const char *s1)
 {
 	char	*ptr;
@@ -79,7 +78,6 @@ void	*ft_calloc(size_t count, size_t size)
 	}
 	return (tmp);
 }
-
 
 char	*ft_strjoin(const char *s1, const char *s2)
 {

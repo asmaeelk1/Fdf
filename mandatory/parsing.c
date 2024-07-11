@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 10:19:15 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/07/08 16:25:01 by asel-kha         ###   ########.fr       */
+/*   Created: 2024/07/09 14:55:30 by asel-kha          #+#    #+#             */
+/*   Updated: 2024/07/11 02:43:43 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,16 @@ static void	line_parcer(char *axis, t_data **data, t_x *x, int y)
 		altitude = ft_atoi(ft_strtok(points[i], ','), &x);
 		color = ft_strtok(NULL, ',');
 		ft_lstadd_back_axis(&x, ft_lstnew_axis(altitude, i, y, color));
+		free(color);
 		i++;
 	}
+	i = 0;
+	while(points[i])
+	{
+		free(points[i]);
+		i++;
+	}
+	free(points);
 	ft_lstadd_back_map(data, x);
 }
 
@@ -73,21 +81,20 @@ void	parsing(char *file_name, t_data **data)
 
 	(1) && (line = NULL, file = check_file(file_name),
 		axis = get_next_line(file));
-	if (!axis)
-		fatal(EMPTY_FILE);
+	(!axis) && (free(*data), fatal(EMPTY_FILE), 0);
 	(1) && (width = line_len(axis), height = 0);
 	while (axis)
 	{
 		if (!ft_strncmp(axis, "\n", ft_strlen(axis)))
 		{
-			axis = get_next_line(file);
+			(1) && (free(axis), axis = get_next_line(file));
 			continue ;
 		}
-		(width != line_len(axis)) && (fatal(INVALID_MAP), 0);
+		(width != line_len(axis)) && (free_map(&(*data)->map), fatal(INVALID_MAP), 0);
 		line_parcer(axis, data, line, height);
-		(1) && (height++, axis = get_next_line(file));
+		(1) && (height++, free(axis),axis = get_next_line(file));
 	}
-	(1) && ((*data)->width = width, (*data)->height = height);
+	(1) && (free(axis) ,(*data)->width = width, (*data)->height = height);
 	((WIDTH <= HEIGHT) && ((*data)->map->space = (WIDTH / 2) / (*data)->width))
 		|| ((*data)->map->space = (HEIGHT / 2) / (*data)->width);
 }

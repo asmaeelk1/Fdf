@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 10:19:15 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/07/08 16:31:52 by asel-kha         ###   ########.fr       */
+/*   Created: 2024/07/09 15:01:02 by asel-kha          #+#    #+#             */
+/*   Updated: 2024/07/09 15:02:18 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,30 +82,29 @@ static void	draw_line(t_data **data, t_p **p1, t_p **p2, t_map **current_line)
 
 void	draw_map(t_data **data)
 {
-	t_map	*current_line;
-	t_p		*p1;
-	t_p		*p2;
-	t_x		*tmp;
+	t_draw_map	var;
 
-	(1) && (current_line = (*data)->map, p1 = ft_calloc(1, sizeof(t_p)),
-		p2 = ft_calloc(1, sizeof(t_p)));
-	while (current_line)
+	(1) && (var.map = (*data)->map, var.p1 = ft_calloc(1, sizeof(t_p)),
+		var.p2 = ft_calloc(1, sizeof(t_p)));
+	while (var.map)
 	{
-		(current_line->next) && (tmp = current_line->next->lines);
-		while (current_line->lines)
+		(var.map->next) && (var.tmp = var.map->next->lines);
+		while (var.map->lines)
 		{
-			draw_line(data, &p1, &p2, &current_line);
-			if (tmp)
+			draw_line(data, &var.p1, &var.p2, &var.map);
+			if (var.tmp)
 			{
-                p1 = &((t_p){current_line->lines->x, current_line->lines->y,
-					current_line->lines->altitude, current_line->lines->color});
-                p2 = &(t_p){p1->x , p1->y + 1, tmp->altitude, p1->color};
-				(1) && (display_center(&p1, data),  display_center(&p2, data), 0);
-                plot_line(((*data)->image), *p1, *p2,  current_line->lines->color);
-                tmp = tmp->next;
-            }
-			current_line->lines = current_line->lines->next;
+				var.p1 = &((t_p){var.map->lines->x, var.map->lines->y,
+						var.map->lines->altitude, var.map->lines->color});
+				var.p2 = &(t_p){var.p1->x, var.p1->y + 1, var.tmp->altitude,
+					var.p1->color};
+				(display_center(&var.p1, data), display_center(&var.p2, data));
+				plot_line(((*data)->image), *var.p1, *var.p2,
+					var.map->lines->color);
+				var.tmp = var.tmp->next;
+			}
+			var.map->lines = var.map->lines->next;
 		}
-		current_line = current_line->next;
+		var.map = var.map->next;
 	}
 }

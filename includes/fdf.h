@@ -28,6 +28,7 @@ typedef struct s_x  t_x;
 typedef struct s_map  t_map;
 typedef struct s_data  t_data;
 typedef struct s_plotline  t_plotline;
+typedef struct s_draw_map  t_draw_map;
 struct	s_p
 {
 	int	x;
@@ -71,6 +72,14 @@ struct s_plotline
 	int	e2;
 };
 
+struct s_draw_map
+{
+	t_map	*map;
+	t_p		*p1;
+	t_p		*p2;
+	t_x		*tmp;
+};
+
 char	*get_next_line(int fd);
 void	fatal(const char *msg);
 int		putnbr_hex(char *hex);
@@ -93,15 +102,10 @@ char	*ft_substr(char *s, unsigned int start, size_t len);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strjoin(const char *s1, const char *s2);
 void	ft_putstr_fd(const char *s, int fd);
-void	free_struct(t_x **x);
+void	free_struct_lines(t_x **x);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
-
-// char	*ft_strtok(char *str, char *sep);
-
+void	free_map(t_map **map);
 char	*ft_strtok(char *str, char del);
-// void	plotLine(mlx_image_t *image, t_p p0, t_p p1, int color);
-// void plotLine(mlx_image_t *image, int x0, int y0, int x1, int y1); 
-// void	update_points_iso(t_p *p);
 void	draw_map(t_data **data);
 
 # endif

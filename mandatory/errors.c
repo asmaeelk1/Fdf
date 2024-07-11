@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 10:19:15 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/07/08 16:16:39 by asel-kha         ###   ########.fr       */
+/*   Created: 2024/07/09 14:30:18 by asel-kha          #+#    #+#             */
+/*   Updated: 2024/07/11 02:13:26 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	fatal(const char *msg)
 	exit(EXIT_FAILURE);
 }
 
-void	free_struct(t_x **x)
+void	free_struct_lines(t_x **x)
 {
 	t_x	*ptr;
 	t_x	*tmp;
@@ -36,6 +36,22 @@ void	free_struct(t_x **x)
 	{
 		ptr = tmp;
 		tmp = tmp->next;
+		free(ptr);
+	}
+}
+
+void	free_map(t_map **map)
+{
+	t_map *ptr;
+	t_map *tmp;
+	
+	tmp = *map;
+	while(tmp)
+	{
+		ptr = tmp;
+		tmp = tmp->next;
+		if(tmp)
+			free_struct_lines(&tmp->lines);
 		free(ptr);
 	}
 }

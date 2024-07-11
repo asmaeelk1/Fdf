@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 10:19:15 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/07/08 16:17:12 by asel-kha         ###   ########.fr       */
+/*   Created: 2024/07/09 14:54:10 by asel-kha          #+#    #+#             */
+/*   Updated: 2024/07/11 02:42:28 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ int	ft_atoi(const char *str, t_x **x)
 	while (str[i] && (str[i] >= '0' && str[i] <= '9'))
 		(1) && (nbr = nbr * 10, nbr += str[i] - 48, i++);
 	if (nbr > INT32_MAX || nbr * signe < INT32_MIN)
-		(free_struct(x), fatal(BAD_ARG));
+		(free_struct_lines(x), fatal(BAD_ARG));
 	if (str[i] && (str[i] < '0' || str[i] > '9') && str[i] != '\n')
-		(free_struct(x), puts("here"), fatal(BAD_ARG));
+		(free_struct_lines(x), puts("here"), fatal(BAD_ARG));
+	free((char *)str);
 	return (nbr * signe);
 }
 

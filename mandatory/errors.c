@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:30:18 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/07/11 02:13:26 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/07/12 01:45:14 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,17 @@ void	free_struct_lines(t_x **x)
 	}
 }
 
-void	free_map(t_map **map)
+void free_map(t_map **map)
 {
-	t_map *ptr;
-	t_map *tmp;
-	
-	tmp = *map;
-	while(tmp)
-	{
-		ptr = tmp;
-		tmp = tmp->next;
-		if(tmp)
-			free_struct_lines(&tmp->lines);
-		free(ptr);
-	}
+    t_map *ptr;
+    t_map *tmp;
+    
+    tmp = *map;
+    while(tmp)
+    {
+        ptr = tmp;
+        tmp = tmp->next;
+        free_struct_lines(&ptr->lines);
+        free(ptr);
+    }
 }

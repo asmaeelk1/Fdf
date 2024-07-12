@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 15:01:02 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/07/09 15:02:18 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/07/12 02:21:05 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,7 @@ void	draw_map(t_data **data)
 {
 	t_draw_map	var;
 
-	(1) && (var.map = (*data)->map, var.p1 = ft_calloc(1, sizeof(t_p)),
-		var.p2 = ft_calloc(1, sizeof(t_p)));
+	var.map = (*data)->map;
 	while (var.map)
 	{
 		(var.map->next) && (var.tmp = var.map->next->lines);
@@ -107,4 +106,5 @@ void	draw_map(t_data **data)
 		}
 		var.map = var.map->next;
 	}
+	free(var.map);
 }

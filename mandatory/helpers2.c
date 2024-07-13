@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:54:10 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/07/12 03:00:52 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/07/13 01:13:55 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int	ft_atoi(const char *str, t_x **x)
 		i++;
 	if (str[i] == '-')
 		(1) && (signe = -1) && (i++);
-	// if (!str[i])
-	// 	(puts("here")) && (fatal(BAD_ARG), 0) ;
 	while (str[i] && (str[i] >= '0' && str[i] <= '9'))
 		(1) && (nbr = nbr * 10, nbr += str[i] - 48, i++);
 	if (nbr > INT32_MAX || nbr * signe < INT32_MIN)

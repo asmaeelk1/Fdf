@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 15:01:02 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/07/12 02:21:05 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/07/13 01:26:16 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	draw_map(t_data **data)
 					var.map->lines->color);
 				var.tmp = var.tmp->next;
 			}
-			var.map->lines = var.map->lines->next;
+			(free(var.map->lines), var.map->lines = var.map->lines->next, 0);
 		}
 		var.map = var.map->next;
 	}

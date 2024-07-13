@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:55:30 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/07/12 03:14:04 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/07/13 01:33:11 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_file(char *file)
 	while (file[i] != '.')
 		i--;
 	if (!ft_strncmp(file + i, ".fdf", ft_strlen(file + i)))
-		fd = open(file, O_RDONLY, 0644);
+		fd = open (file, O_RDONLY, 0644);
 	if (fd < 0)
 		fatal(INVALID_FILE);
 	return (fd);
@@ -35,19 +35,15 @@ static int	line_len(char *line)
 {
 	int		len;
 	char	**points;
-	int		i;
 
-	i = 0;
 	points = ft_split(line, ' ');
 	len = 0;
 	while (points[len])
-		len++;
-	while(points[i])
 	{
-		free(points[i]);
-		i++;
+		free(points[len]);
+		len++;
 	}
-	free(points);
+	free (points);
 	return (len);
 }
 
@@ -65,13 +61,12 @@ static void	line_parcer(char *axis, t_data **data, t_x *x, int y)
 	{
 		altitude = ft_atoi(ft_strtok(points[i], ','), &x);
 		color = ft_strtok(NULL, ',');
-		free(points[i]);
+		free (points[i]);
 		ft_lstadd_back_axis(&x, ft_lstnew_axis(altitude, i, y, color));
 		free(color);
 		i++;
 	}
-	free(points);
-	exit(0);
+	free (points);
 	ft_lstadd_back_map(data, x);
 }
 
@@ -85,21 +80,21 @@ void	parsing(char *file_name, t_data **data)
 
 	(1) && (line = NULL, file = check_file(file_name),
 		axis = get_next_line(file));
-	(!axis) && (free(*data), free(data),fatal(EMPTY_FILE), 0);
+	(!axis) && (free (*data), fatal(EMPTY_FILE), 0);
 	(1) && (width = line_len(axis), height = 0);
 	while (axis)
 	{
 		if (!ft_strncmp(axis, "\n", ft_strlen(axis)))
 		{
-			(1) && (free(axis), axis = get_next_line(file));
+			(1) && (free (axis), axis = get_next_line(file));
 			continue ;
 		}
 		(width != line_len(axis)) && (free_map(&(*data)->map),
-			free(axis) ,free(*data),fatal(INVALID_MAP), 0);
+			free (axis), free(*data), fatal(INVALID_MAP), 0);
 		line_parcer(axis, data, line, height);
-		(1) && (height++, free(axis), axis = get_next_line(file));
+		(1) && (height++, free (axis), axis = get_next_line(file));
 	}
-	(1) && (free(axis) ,(*data)->width = width, (*data)->height = height);
+	(1) && (free (axis), (*data)->width = width, (*data)->height = height);
 	((WIDTH <= HEIGHT) && ((*data)->map->space = (WIDTH / 2) / (*data)->width))
 		|| ((*data)->map->space = (HEIGHT / 2) / (*data)->width);
 }

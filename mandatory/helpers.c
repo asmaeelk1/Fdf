@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:53:55 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/07/09 14:53:56 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/07/13 01:23:22 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*ft_strtok(char *str, char del)
 	(1) && (i = 0);
 	token = ft_calloc(50, 1);
 	if (str)
-		line = ft_strdup(str);
+		line = str;
 	while (*line && *line == del)
 		line++;
 	while (*line && *line != del)

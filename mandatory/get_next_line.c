@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:53:21 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/07/09 14:53:23 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/07/13 02:49:50 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*split_nl(char **save)
 	tmp = *save;
 	while (tmp[i] && tmp[i] != '\n')
 		i++;
-	line = ft_substr(*save, 0, i + 1);
+	line = ft_substr(*save, 0, i);
 	if (tmp[i] == '\n')
 		i++;
 	*save = ft_strdup(tmp + i);

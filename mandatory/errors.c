@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:30:18 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/07/13 01:12:57 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/07/14 06:27:38 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	free_struct_lines(t_x **x)
 	tmp = *x;
 	while (tmp)
 	{
+		// puts("here");
 		ptr = tmp;
 		tmp = tmp->next;
 		free(ptr);

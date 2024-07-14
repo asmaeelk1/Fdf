@@ -6,11 +6,12 @@
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:53:55 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/07/13 01:23:22 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/07/14 00:49:08 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+#include <stdio.h>
 
 int	ft_putchar(char c)
 {
@@ -62,3 +63,31 @@ char	*ft_strtok(char *str, char del)
 	token[i] = '\0';
 	return (token);
 }
+
+// bool	find_c(const char sep, char c)
+// {
+// 		if (sep == c)
+// 			return (true);
+// 	return (false);
+// }
+
+// char	*ft_strtok(char *str, char sep)
+// {
+// 	static char	*hold;
+// 	char		*token;
+
+// 	if (str)
+// 		hold = str;
+// 	if (!hold || !*hold)
+// 		return (NULL);
+// 	while (*hold && find_c(sep, *hold))
+// 		hold++;
+// 	if (!*hold)
+// 		return (NULL);
+// 	token = hold;
+// 	while (*hold && !find_c(sep, *hold))
+// 		hold++;
+// 	if (*hold)
+// 		*hold++ = 0;
+// 	return (token);
+// }

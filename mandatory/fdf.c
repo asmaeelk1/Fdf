@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:53:02 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/07/13 01:22:16 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/07/14 06:23:31 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,16 @@ void	l(void)
 	system("leaks fdf");
 }
 
+void cleanup_and_exit(void *param)
+{
+    t_data *data = (t_data *)param;
+    
+    mlx_terminate(data->mlx);
+    free_map(&data->map);
+    free(data);
+    exit(0);
+}
+
 int	main(int ac, char **av)
 {
 	t_data	*data;
@@ -58,8 +68,9 @@ int	main(int ac, char **av)
 	}
 	draw_map(&data);
 	mlx_loop(data->mlx);
+	// mlx_loop_hook(data->mlx, &cleanup_and_exit, data);
 	mlx_terminate(data->mlx);
 	free_map(&data->map);
 	free (data);
-	exit(0);
+	// exit(0);
 }

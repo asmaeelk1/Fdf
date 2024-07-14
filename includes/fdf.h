@@ -75,6 +75,7 @@ struct s_plotline
 struct s_draw_map
 {
 	t_map	*map;
+	t_x		*points;
 	t_p		*p1;
 	t_p		*p2;
 	t_x		*tmp;
@@ -85,6 +86,7 @@ void	fatal(const char *msg);
 int		putnbr_hex(char *hex);
 void	parsing(char *file_name, t_data **data);
 char	**ft_split(char *s, char c);
+int	countwords(char *str, char c);
 char	*ft_strdup(const char *s1);
 int		ft_strncmp(char *s1, char *s2, size_t n);
 size_t	ft_strlen(const char *c);
@@ -107,5 +109,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 void	free_map(t_map **map);
 char	*ft_strtok(char *str, char del);
 void	draw_map(t_data **data);
+void	plot_line(mlx_image_t *image, t_p p0, t_p p1, int color);
 
 # endif

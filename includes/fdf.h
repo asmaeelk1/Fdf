@@ -1,6 +1,17 @@
-# ifndef FDF_H
-# define FDF_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/14 23:00:38 by asel-kha          #+#    #+#             */
+/*   Updated: 2024/07/15 00:27:08 by asel-kha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#ifndef FDF_H
+# define FDF_H
 # include "../MLX/include/MLX42/MLX42.h"
 # include <math.h>
 # include <stdlib.h>
@@ -8,14 +19,13 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <stdbool.h>
-
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 100000
 # endif
 
- 
-#define WIDTH 1800
-#define HEIGHT 1200
+# define WIDTH 1800
+# define HEIGHT 1200
+
 
 # define BAD_ARG "\033[31mError:\033[0m Bad arguments\n"
 # define INVALID_FILE "\033[31mError:\033[0m Invalide file\n"
@@ -23,43 +33,43 @@
 # define EMPTY_FILE "\033[31mError:\033[0m Empty file\n"
 # define MALLOC_FAIL "\033[31mAllocation fail\033[0m\n"
 
-typedef struct s_p  t_p;
-typedef struct s_x  t_x;
-typedef struct s_map  t_map;
-typedef struct s_data  t_data;
-typedef struct s_plotline  t_plotline;
-typedef struct s_draw_map  t_draw_map;
+typedef struct s_p			t_p;
+typedef struct s_x			t_x;
+typedef struct s_map		t_map;
+typedef struct s_data		t_data;
+typedef struct s_plotline	t_plotline;
+typedef struct s_draw_map	t_draw_map;
 struct	s_p
 {
 	int	x;
-	int y;
-	int altitude;
-	int color;
+	int	y;
+	int	altitude;
+	int	color;
 };
 struct s_x
 {
 	int	x;
 	int	y;
-    int altitude;
-    int color;
-    t_x *next;
+	int	altitude;
+	int	color;
+	t_x	*next;
 };
 
 struct s_map
 {
-    t_x *lines;
-	int space;
-	t_map *next;
+	t_x		*lines;
+	int		space;
+	t_map	*next;
 };
 
 struct s_data
 {
-    t_map	*map;
-	int width;
-	int height;
-	int zoom;
-	mlx_t* mlx;
-	mlx_image_t* image;
+	t_map		*map;
+	int			width;
+	int			height;
+	int			zoom;
+	mlx_t		*mlx;
+	mlx_image_t	*image;
 };
 
 struct s_plotline
@@ -86,7 +96,7 @@ void	fatal(const char *msg);
 int		putnbr_hex(char *hex);
 void	parsing(char *file_name, t_data **data);
 char	**ft_split(char *s, char c);
-int	countwords(char *str, char c);
+int		countwords(char *str, char c);
 char	*ft_strdup(const char *s1);
 int		ft_strncmp(char *s1, char *s2, size_t n);
 size_t	ft_strlen(const char *c);
@@ -111,4 +121,4 @@ char	*ft_strtok(char *str, char del);
 void	draw_map(t_data **data);
 void	plot_line(mlx_image_t *image, t_p p0, t_p p1, int color);
 
-# endif
+#endif

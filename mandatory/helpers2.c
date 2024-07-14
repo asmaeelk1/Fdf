@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:54:10 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/07/14 07:13:34 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/07/14 22:40:47 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_atoi(const char *str, t_x **x)
 {
 	int		i;
-	long long	nbr;
+	long	nbr;
 	int		signe;
 
 	(1) && (i = 0, signe = 1, nbr = 0);
@@ -27,10 +27,10 @@ int	ft_atoi(const char *str, t_x **x)
 	{
 		(1) && (nbr = nbr * 10, nbr += str[i] - 48, i++);
 		if (nbr > INT32_MAX || (nbr * signe) < INT32_MIN)
-		(free_struct_lines(x), fatal(BAD_ARG));
+			(free_struct_lines(x), fatal(BAD_ARG));
 	}
 	if (str[i] && (str[i] < '0' || str[i] > '9') && str[i] != '\n')
-		(free_struct_lines(x), puts("here"), fatal(BAD_ARG));
+		(free_struct_lines(x), fatal(BAD_ARG));
 	free((char *)str);
 	return (nbr * signe);
 }
@@ -70,7 +70,6 @@ int	putnbr_hex(char *hex)
 			hex_res = hex_res * 16 + (hex[i] - 'a' + 10);
 		else if (hex[i] >= 'A' && hex[i] <= 'F')
 			hex_res = hex_res * 16 + (hex[i] - 'A' + 10);
-		// if((hex[i] <= '0' && hex[i] >= '9') || (hex[i] <= 'a' && hex[i] >= 'f') || (hex[i] <= 'A' && hex[i] >= 'F'))
 		i++;
 	}
 	hex_res = hex_res * 16 + 15;

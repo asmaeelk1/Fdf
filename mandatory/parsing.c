@@ -6,12 +6,11 @@
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:55:30 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/07/14 00:47:06 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/07/14 20:42:22 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-#include <stdio.h>
 
 int	check_file(char *file)
 {
@@ -79,7 +78,7 @@ void	parsing(char *file_name, t_data **data)
 		line_parcer(axis, data, line, height);
 		(1) && (height++, free (axis), axis = get_next_line(file));
 	}
-	(1) && (free (axis),(*data)->width = width,  (*data)->height = height);
+	(1) && (free (axis), (*data)->width = width, (*data)->height = height);
 	((WIDTH <= HEIGHT) && ((*data)->map->space = (WIDTH / 2) / (*data)->width))
 		|| ((*data)->map->space = (HEIGHT / 2) / (*data)->width);
 }

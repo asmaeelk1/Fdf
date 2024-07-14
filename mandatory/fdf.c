@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:53:02 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/07/14 06:23:31 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/07/15 00:27:15 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,35 +18,42 @@ int	init_mlx_data(t_data **data)
 	if (!((*data)->mlx))
 	{
 		ft_putstr_fd(mlx_strerror(mlx_errno), 2);
-		exit(EXIT_FAILURE);
+		return (1);
 	}
 	(*data)->image = mlx_new_image((*data)->mlx, WIDTH, HEIGHT);
 	if (!((*data)->image))
 	{
 		mlx_close_window((*data)->mlx);
-		exit(EXIT_FAILURE);
+		return (1);
 	}
 	if (mlx_image_to_window((*data)->mlx, (*data)->image, 0, 0) == -1)
 	{
 		mlx_close_window((*data)->mlx);
-		exit(EXIT_FAILURE);
+		return (1);
 	}
 	return (0);
+}
+
+void	cleanup_and_exit(t_data *data)
+{
+	mlx_terminate((*data).mlx);
+	free_map(&(*data).map);
+	free (data);
+	exit (0);
+}
+
+void	ft_hook(void *param)
+{
+	t_data	**data;
+
+	data = param;
+	if (mlx_is_key_down((*data)->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window((*data)->mlx);
 }
 
 void	l(void)
 {
 	system("leaks fdf");
-}
-
-void cleanup_and_exit(void *param)
-{
-    t_data *data = (t_data *)param;
-    
-    mlx_terminate(data->mlx);
-    free_map(&data->map);
-    free(data);
-    exit(0);
 }
 
 int	main(int ac, char **av)
@@ -67,10 +74,7 @@ int	main(int ac, char **av)
 		exit(EXIT_FAILURE);
 	}
 	draw_map(&data);
+	mlx_loop_hook(data->mlx, (void *)ft_hook, &data);
 	mlx_loop(data->mlx);
-	// mlx_loop_hook(data->mlx, &cleanup_and_exit, data);
-	mlx_terminate(data->mlx);
-	free_map(&data->map);
-	free (data);
-	// exit(0);
+	cleanup_and_exit(data);
 }
